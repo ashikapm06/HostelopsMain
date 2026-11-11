@@ -169,3 +169,30 @@ exports.remove = async (req, res) => {
     res.json({ message: 'Deleted' });
   } catch (err) { res.status(500).json({ message: err.message }); }
 };
+
+// Public: Get homepage statistics (no personal information)
+exports.getPublicStats = async (req, res) => {
+  try {
+    const total = await Complaint.countDocuments();
+    const resolved = await Complaint.countDocuments({ status: 'Resolved' });
+
+    const resolvedComplaints = await Complaint.find(
+      { status: 'Resolved', resolvedAt: { $exists: true, $ne: null } },
+      'createdAt resolvedAt'
+    );
+
+    const avgResolutionHrs = resolvedComplaints.length
+      ? (
+          resolvedComplaints.reduce(
+            (sum, c) =>
+              sum + (new Date(c.resolvedAt) - new Date(c.createdAt)),
+            0
+          ) / resolvedComplaints.length / 3600000
+        ).toFixed(1)
+      : 0;
+
+    res.json({ total, resolved, avgResolutionHrs });
+  } catch (err) {
+    res.status(500).json({ message: 'Unable to load public statistics' });
+  }
+};
