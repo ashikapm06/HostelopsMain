@@ -2553,13 +2553,12 @@
       toast('Signed out', 'info');
       goLanding();
     }
-    function quickAdmin() {
-      const u = DB.users.find(u => u.role === 'admin');
-      SESSION = { user: { id: u._id, ...u, password: undefined }, token: 'demo' };
-      localStorage.setItem('hostelops_session', JSON.stringify(SESSION));
-      toast('Admin demo active ⚙️', 'info');
-      goApp();
-    }
+    
+function quickAdmin() {
+  goLanding();
+  toast('Please sign in using your admin credentials.', 'info');
+}
+
 
     // ============================================================
     //  STUDENT DASHBOARD
