@@ -3049,11 +3049,28 @@ function quickAdmin() {
 
     // Landing counters
     function counter(id, to, suf = '') { let n = 0; const step = Math.ceil(to / 40); const t = setInterval(() => { n = Math.min(n + step, to); document.getElementById(id).textContent = n + suf; if (n >= to) clearInterval(t); }, 30); }
+    
     window.addEventListener('load', () => {
       if (SESSION.token) setTimeout(goApp, 50);
-      counter('hs1', DB.complaints.length);
-      counter('hs2', DB.complaints.filter(c => c.status === 'Resolved').length);
+      loadPublicStats();
     });
+
+    async function loadPublicStats() {
+      try {
+        const response = await fetch(API + '/complaints/public-stats');
+        if (!response.ok) throw new Error('Could not load statistics');
+
+        const stats = await response.json();
+
+        counter('hs1', Number(stats.total));
+        counter('hs2', Number(stats.resolved));
+      } catch (error) {
+        console.error('Homepage statistics failed:', error);
+        document.getElementById('hs1').textContent = '—';
+        document.getElementById('hs2').textContent = '—';
+      }
+    }
+
   </script>
 </body>
 
