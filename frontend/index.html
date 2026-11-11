@@ -1753,7 +1753,7 @@
         <h1>Smart Hostel<br /><span class="h1-grad">Complaint System</span></h1>
         <div class="hero-btns">
           <button class="btn btn-p" onclick="goAuth('register')">🎓 Student Portal</button>
-          <button class="btn btn-g" onclick="quickAdmin()">⚙️ Admin Demo</button>
+          <button class="btn btn-g" onclick="quickAdmin()">⚙️ Admin </button>
         </div>
         <div class="hstats">
           <div class="hstat">
@@ -1817,8 +1817,8 @@
             </div>
             <button class="btn btn-p btn-full" onclick="doLogin()" id="login-btn">Sign In →</button>
             <div class="demo-box">
-              <div style="font-weight:800;color:var(--p3);margin-bottom:.35rem">Demo Credentials</div>
-              👨‍🎓 <strong>student@hostel.com</strong> / 123456<br />⚙️ <strong>admin@hostel.com</strong> / admin123
+             <div style="font-weight:800;color:var(--p3);margin-bottom:.35rem">Credentials</div>
+             👨‍🎓 <strong>student@hostel.com</strong> / 123456<br />⚙️ <strong>admin@hostel.com</strong> / admin123
             </div>
           </div>
           <!-- REGISTER -->
@@ -2301,7 +2301,7 @@
 
     function setApiStatus(live) {
       document.getElementById('adot').className = 'adot ' + (live ? 'live' : 'mock');
-      document.getElementById('astat').textContent = live ? '🟢 Live Backend Connected' : '🟡 Demo Mode — Connect Docker backend for production';
+      document.getElementById('astat').textContent = live ? '🟢 Live Backend Connected' : '🔴 Backend Connection Failed';     
       document.getElementById('aurl').textContent = API;
     }
 
