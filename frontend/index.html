@@ -2236,7 +2236,7 @@
     // ============================================================
     //  CONFIG
     // ============================================================
-    const API = window._API || '/api';
+    const API = window._API || 'https://hostelops-backend-3qaz.onrender.com/api';
     let MOCK = false;
     let SESSION = { user: null, token: null };
     try { const s = localStorage.getItem('hostelops_session'); if (s) SESSION = JSON.parse(s); } catch (e) { }
